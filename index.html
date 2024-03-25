@@ -14,6 +14,255 @@
     </div>
 <div class="footer"></div>
 
-<script type="module" src="assets/js/index.js" ></script>
+<script>
+   const DataContainer = {
+    class: '',
+    rows: 13,
+    cols: 4,
+    width: '48%',
+    height: 'calc(100vh - 50px - 100px)'
+  };
+
+   const Data = [
+    {
+      'id': 'item-1',
+      'class': '',
+      'row': 3,
+      'col': 4,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-2',
+      'class': '',
+      'row': 1,
+      'col': 3,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-3',
+      'class': '',
+      'row': 1,
+      'col': 1,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-4',
+      'class': '',
+      'row': 2,
+      'col': 1,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-5',
+      'class': '',
+      'row': 2,
+      'col': 2,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-6',
+      'class': '',
+      'row': 2,
+      'col': 1,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-7',
+      'class': '',
+      'row': 1,
+      'col': 2,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-8',
+      'class': '',
+      'row': 1,
+      'col': 1,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-9',
+      'class': '',
+      'row': 1,
+      'col': 1,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-10',
+      'class': '',
+      'row': 2,
+      'col': 2,
+      'images': [{
+        src: './assets/images/image_10.jpeg',
+        alt: 'logo',
+        width: "100%",
+        height: "100%",
+      }],
+      'style': ''
+    },
+    {
+      'id': 'item-11',
+      'class': '',
+      'row': 2,
+      'col': 2,
+      'images': [{
+        src: './assets/images/image_11.jpeg',
+        alt: 'logo',
+        width: "100%",
+        height: "100%",
+      }],
+      'style': ''
+    },
+    {
+      'id': 'item-12',
+      'class': '',
+      'row': 2,
+      'col': 2,
+      'images': [
+        {
+          class: "sliderImage",
+          src: './assets/images/image_12-1.jpeg',
+          alt: 'logo',
+          width: "100%",
+          height: "100%",
+        },
+        {
+          class: "sliderImage",
+          src: './assets/images/image_12-2.jpeg',
+          alt: 'logo',
+          width: "100%",
+          height: "100%",
+        },
+        {
+          class: "sliderImage",
+          src: './assets/images/image_12-3.jpeg',
+          alt: 'logo',
+          width: "100%",
+          height: "100%",
+        }
+      ],
+      'style': ''
+    },
+    {
+      'id': 'item-13',
+      'class': '',
+      'row': 2,
+      'col': 2,
+      'images': [{
+        class: "",
+        src: './assets/images/image_13.jpeg',
+        alt: 'logo',
+        width: "100%",
+        height: "100%",
+      }],
+      'style': ''
+    },
+    {
+      'id': 'item-14',
+      'class': '',
+      'row': 2,
+      'col': 2,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-15',
+      'class': '',
+      'row': 1,
+      'col': 2,
+      'images': [],
+      'style': ''
+    },
+    {
+      'id': 'item-16',
+      'class': '',
+      'row': 1,
+      'col': 2,
+      'images': [],
+      'style': ''
+    }
+  ];
+
+  (function() {
+    const mainDom = document.querySelector("#main");
+    if(!mainDom) return;
+    const gridContainer = createGridContainer();
+
+    createGridItem(gridContainer);
+
+    mainDom.insertBefore(gridContainer, mainDom.querySelector("#text"))
+
+    function createGridContainer () {
+      const gridContainer = document.createElement("div");
+      gridContainer.className = "grid-container " + (DataContainer.class || "");
+      if(DataContainer.width) gridContainer.style.width = DataContainer.width;
+      if(DataContainer.height) gridContainer.style.height = DataContainer.height;
+      if(DataContainer.height) gridContainer.style.height = DataContainer.height;
+      if(DataContainer.rows) gridContainer.style["grid-template-rows"] = `repeat(${DataContainer.rows}, minmax(0, 1fr))`;
+      if(DataContainer.cols) gridContainer.style["grid-template-columns"] = `repeat(${DataContainer.cols}, 1fr)`;
+      return gridContainer
+    }
+
+    function createGridItem (gridContainer) {
+      Data.forEach((item, index) => {
+        const gridItem = document.createElement("div");
+        gridItem.id = "item-" + (index + 1);
+        gridItem.className = "grid-item " + (item.class || "");
+        if(item.row) gridItem.style["grid-row"] = `span ${item.row}`;
+        if(item.col) gridItem.style["grid-column"] = `span ${item.col}`;
+        if(item.images.length > 1) {
+          createImageSlider(gridItem, item.images);
+        }else if(item.images.length === 1){
+          createImage(gridItem, item.images[0]);
+        }else {
+          gridItem.innerText = index + 1;
+        }
+        gridContainer.appendChild(gridItem);
+      });
+    }
+    function createImageSlider(gridItem, images) {
+      let currentIndex = 0;
+      const sliderDom = document.createElement("div");
+      sliderDom.id = "slider";
+      sliderDom.className = "slider";
+      console.log(sliderDom)
+      images.forEach(image => {
+        createImage(sliderDom, image);
+      });
+
+      function changeSlide(sliderDom) {
+        sliderDom.children[currentIndex].style.opacity = '0';
+        currentIndex = (currentIndex + 1) % images.length;
+        console.log(currentIndex)
+        sliderDom.children[currentIndex].style.opacity = '1';
+      }
+      setInterval(() => changeSlide(sliderDom), 5000);
+      gridItem.appendChild(sliderDom)
+    }
+    function createImage(gridItem, image) {
+      const imageDom = document.createElement("img");
+      if(image.width) imageDom.style.width = image.width;
+      if(image.height) imageDom.style.height = image.height;
+      if(image.class) imageDom.className = image.class;
+      imageDom.src = image.src;
+      imageDom.alt = image.alt;
+
+      gridItem.appendChild(imageDom)
+    }
+
+
+
+  })();
+
+</script>
 </body>
 </html>
