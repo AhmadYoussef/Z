@@ -1,4 +1,4 @@
-import {Data, DataContainer,} from '../data';
+import {Data, DataContainer,} from '../data/index';
 
 (function() {
   const mainDom = document.querySelector("#main");
@@ -39,7 +39,6 @@ import {Data, DataContainer,} from '../data';
   }
   function createImageSlider(gridItem, images) {
     let currentIndex = 0;
-    debugger
     const sliderDom = document.createElement("div");
     sliderDom.id = "slider";
     sliderDom.className = "slider";
