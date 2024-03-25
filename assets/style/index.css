@@ -1,0 +1,60 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+    box-sizing: border-box;
+
+}
+
+.header {
+    height: 50px;
+    background-color: darkgrey;
+}
+
+.footer {
+    height: 100px;
+    background-color: darkgrey;
+}
+
+.main{
+    display: flex;
+    width: 1300px;
+    margin: auto
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(13, minmax(0, 1fr));
+    height: calc(100vh - 50px - 100px);
+    width: 48%;
+    gap: 0; /* Adjust as needed */
+    overflow: hidden;
+}
+
+.grid-item {
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    overflow: hidden;
+}
+
+.slider{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.sliderImage {
+    position: absolute;
+    opacity: 0;
+    transition: opacity .5ms ease-in-out;
+}
+
+.sliderImage:first-of-type {
+    opacity: 1;
+}
